@@ -50,15 +50,19 @@ function toBase64Url(input: Uint8Array | string): string {
 }
 
 function pemToDer(pem: string): ArrayBuffer {
-  // Clean all header, footer, literal \n, literal \r, newlines and spaces
-  const body = pem
+  let body = pem
     .replace(/-----BEGIN [^-]+-----/g, "")
     .replace(/-----END [^-]+-----/g, "")
     .replace(/\\r/g, "")
     .replace(/\\n/g, "")
     .replace(/\r/g, "")
     .replace(/\n/g, "")
-    .replace(/[^A-Za-z0-9+/=]/g, ""); // strictly keep only valid base64 chars
+    .replace(/[^A-Za-z0-9+/=]/g, "");
+
+  // Fix missing padding if truncated
+  while (body.length % 4 !== 0) {
+    body += "=";
+  }
 
   const bin = atob(body);
   const bytes = new Uint8Array(bin.length);
