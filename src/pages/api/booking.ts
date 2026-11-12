@@ -171,11 +171,14 @@ export async function handleBookingRequest(
     console.error("Sheets configuration missing", {
       hasSheetId: Boolean(spreadsheetId),
       hasSa: Boolean(sa),
+      hasJson: Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON),
+      hasEmail: Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL),
+      hasKey: Boolean(env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY),
     });
     return errorResponse(
       502,
       "SHEET_WRITE_FAILED",
-      "Koneksi ke Google Sheet Demo belum terkonfigurasi. Gunakan fallback WhatsApp di bawah.",
+      `Koneksi ke Google Sheet Demo belum terkonfigurasi (sheetId:${Boolean(spreadsheetId)}, sa:${Boolean(sa)}, json:${Boolean(env.GOOGLE_SERVICE_ACCOUNT_JSON)}, email:${Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL)}, key:${Boolean(env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY)}). Gunakan fallback WhatsApp di bawah.`,
       { wa_link: buildWhatsappLink(waTarget, validation.data) },
     );
   }
