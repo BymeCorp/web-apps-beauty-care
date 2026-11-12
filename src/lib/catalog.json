@@ -1,0 +1,74 @@
+[
+  {
+    "id": "facial-1",
+    "category": "Facial",
+    "name": "Hydra Glow Facial",
+    "duration_minutes": 60,
+    "price_idr": 450000,
+    "description": "Eksfoliasi lembut dengan serum hidrasi untuk mengembalikan kilau alami kulit kusam.",
+    "prep_note": "Datang dengan wajah bersih tanpa makeup tebal."
+  },
+  {
+    "id": "facial-2",
+    "category": "Facial",
+    "name": "Calming Sensitive Facial",
+    "duration_minutes": 60,
+    "price_idr": 520000,
+    "description": "Perawatan penenang barrier kulit untuk kulit reaktif, kemerahan, atau mudah iritasi.",
+    "prep_note": "Hentikan krim eksfoliasi 48 jam sebelum sesi."
+  },
+  {
+    "id": "facial-3",
+    "category": "Facial",
+    "name": "Chemical Peel Mild",
+    "duration_minutes": 45,
+    "price_idr": 350000,
+    "description": "Peeling ringan untuk mengangkat sel kulit mati dan menghaluskan tekstur pori.",
+    "prep_note": "Hindari paparan matahari langsung 2 hari sebelum tindakan."
+  },
+  {
+    "id": "laser-1",
+    "category": "Laser",
+    "name": "Pico Laser Brightening",
+    "duration_minutes": 30,
+    "price_idr": 1250000,
+    "description": "Teknologi pulsa cepat untuk meratakan rona kulit dan memudarkan noda pasca-jerawat.",
+    "prep_note": "Gunakan sunscreen SPF 30+ rutin dan hentikan retinoid 3 hari sebelumnya."
+  },
+  {
+    "id": "laser-2",
+    "category": "Laser",
+    "name": "Laser Hair Removal",
+    "duration_minutes": 30,
+    "price_idr": 1850000,
+    "description": "Pengurangan bulu halus area wajah atau ketiak secara nyaman dan minim downtime.",
+    "prep_note": "Cukur area target 24 jam sebelum sesi; jangan waxing."
+  },
+  {
+    "id": "laser-3",
+    "category": "Laser",
+    "name": "Laser Rejuvenation Toning",
+    "duration_minutes": 40,
+    "price_idr": 980000,
+    "description": "Stimulasi kolagen halus untuk memperbaiki elastisitas dan tampilan pori besar.",
+    "prep_note": "Informasikan riwayat sensitivitas cahaya saat sesi konsultasi."
+  },
+  {
+    "id": "booster-1",
+    "category": "Skin Booster",
+    "name": "Skin Booster Glow",
+    "duration_minutes": 45,
+    "price_idr": 690000,
+    "description": "Hidrasi mendalam lapisan dermis untuk kulit kenyal, lembap, dan tampak segar.",
+    "prep_note": "Hindari konsumsi suplemen pengencer darah 24 jam sebelumnya."
+  },
+  {
+    "id": "booster-2",
+    "category": "Skin Booster",
+    "name": "DNA Salmon Booster",
+    "duration_minutes": 45,
+    "price_idr": 1450000,
+    "description": "Nutrisi regenerasi kulit untuk elastisitas, hidrasi, dan pemulihan bekas jerawat.",
+    "prep_note": "Area tindakan akan diberi krim anestesi topikal 20 menit sebelum sesi."
+  }
+]
