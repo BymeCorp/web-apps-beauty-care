@@ -1,0 +1,6 @@
+name = "web-apps-beauty-care"
+compatibility_date = "2026-11-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+# Bind RATE_LIMIT_KV dan SESSION via Cloudflare Dashboard Pages -> Settings -> Functions -> KV namespaces

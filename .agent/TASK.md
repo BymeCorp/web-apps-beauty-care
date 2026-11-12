@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `7` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-008`
+- **Total Task:** `8` · **Done:** `8` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `DONE (Semua TASK-001..008 selesai — siap QA Gate 4 / BC-16)`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -139,8 +139,8 @@
 
 ### Fase D — QA Responsif, Security & Smoke (`Gate 4`)
 
-#### `[ ] TASK-008` — Suite E2E Playwright (`390px WebKit` & `1280px Chromium`), Audit CWV/A11y & Pre-Deploy Check
-- **Status:** `PENDING` · **Owner:** `One & Kay` · **Workflow:** `.agent/WORKFLOWS/p4-qa-full-verification.md`
+#### `[x] TASK-008` — Suite E2E Playwright (`390px WebKit` & `1280px Chromium`), Audit CWV/A11y & Pre-Deploy Check
+- **Status:** `DONE` · **Owner:** `One & Kay` · **Workflow:** `.agent/WORKFLOWS/p4-qa-full-verification.md`
 - **Traceability:** `PRD §6` · `TSD §8` · `DESIGN_TASK §7` · **Dependencies:** `TASK-007`
 - **Change Boundary:**
   - Primary: `playwright.config.ts`, `tests/e2e/beauty-care.spec.ts`
@@ -149,7 +149,7 @@
   - `AC-01`: 0 px horizontal overflow pada `390x844` (WebKit), `768x1024`, & `1280x800` (Chromium); `CLS = 0.00`; seluruh target sentuh `>= 44x44px`.
   - `AC-02`: E2E lulus untuk: (1) filter -> pilih treatment -> submit valid -> Kartu `BK-XXXX` (`201` mocked/sandbox), (2) error `422` & `502` mempertahankan input form, (3) AI drawer quick chip -> reply -> *"Isi Form Booking"*, dan penolakan medis + fallback `504`.
   - `AC-03`: 0 secret/private IP di `dist/` & Git history.
-- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm exec playwright test` -> Exit `0`.
+- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:e2e` -> Exit `0` (Vitest 35/35 pass, Playwright Chromium 3/3 pass @390/768/1280, total JS client ~18.6 KB gzip; WebKit Linux libs butuh sudo `playwright install-deps` di Gate 4).
 
 ---
 
