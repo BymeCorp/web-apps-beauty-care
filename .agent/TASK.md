@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `2` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-003`
+- **Total Task:** `8` · **Done:** `3` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-004`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -55,8 +55,8 @@
 
 ### Fase B — Fitur Inti (`Rate Limit, Google Sheets API, AI CS`)
 
-#### `[ ] TASK-003` — Rate Limiter CF KV (`rate-limit.ts`) & Google Sheets WebCrypto Client (`sheets.ts`)
-- **Status:** `PENDING` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-external-integration.md`
+#### `[x] TASK-003` — Rate Limiter CF KV (`rate-limit.ts`) & Google Sheets WebCrypto Client (`sheets.ts`)
+- **Status:** `DONE` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-external-integration.md`
 - **Traceability:** `PRD §5 FR-02` · `TSD §4.2, §5, §6.1` · **Dependencies:** `TASK-002`
 - **Change Boundary:**
   - Primary: `src/lib/rate-limit.ts`, `src/lib/sheets.ts`, `tests/unit/rate-limit.test.ts`, `tests/unit/sheets.test.ts`
@@ -66,9 +66,9 @@
   - `AC-02`: `sheets.ts` melakukan JWT RSA signing via `crypto.subtle` (tanpa SDK `googleapis`), request token cache pendek, dan `values:append` dengan timeout `10s`.
   - `AC-03`: Semua sel dilewatkan `sanitizeSheetCell()` sebelum dikirim; gagal pada `Appointments` setelah `Client_Leads` sukses mengembalikan flag `partial: true` tanpa membuang booking.
 - **TDD & Langkah:**
-  1. [ ] **RED:** Unit test mock KV (normal, limit `429`, KV exception fail-open) dan mock fetch Sheets (JWT header, timeout `10s`, partial second append).
-  2. [ ] **GREEN:** Implementasi `rate-limit.ts` & `sheets.ts`.
-  3. [ ] **REFACTOR:** Verifikasi masking nomor WA di log (maks 4 digit akhir).
+  1. [x] **RED:** Unit test mock KV (normal, limit `429`, KV exception fail-open) dan mock fetch Sheets (JWT header, timeout `10s`, partial second append).
+  2. [x] **GREEN:** Implementasi `rate-limit.ts` & `sheets.ts`.
+  3. [x] **REFACTOR:** Verifikasi masking nomor WA di log (maks 4 digit akhir). Exit `0` (Vitest 16/16 pass).
 - **Verification Gate:** `pnpm test -- tests/unit/ && pnpm lint && pnpm typecheck` -> Exit `0`.
 
 ---
