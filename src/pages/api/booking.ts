@@ -17,6 +17,8 @@ export const prerender = false;
 export interface BookingEnv {
   DEMO_SPREADSHEET_ID?: string;
   GOOGLE_SERVICE_ACCOUNT_JSON?: string;
+  GOOGLE_SERVICE_ACCOUNT_EMAIL?: string;
+  GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?: string;
   PUBLIC_DEMO_WA_NUMBER?: string;
   RATE_LIMIT_KV?: KvLike;
 }
@@ -53,20 +55,41 @@ export function buildWhatsappLink(
 
 function parseServiceAccount(
   rawJson: string | undefined,
+  fallbackEmail?: string,
+  fallbackKey?: string,
 ): ServiceAccountCredentials | null {
+  if (fallbackEmail && fallbackKey) {
+    return {
+      client_email: fallbackEmail.trim(),
+      private_key: fallbackKey.replace(/\\n/g, "\n").trim(),
+    };
+  }
+
   if (!rawJson) return null;
+  let text = rawJson.trim();
+
+  // Try base64 decode if it starts with base64 signature
+  if (!text.startsWith("{")) {
+    try {
+      text = atob(text).trim();
+    } catch {
+      // not base64
+    }
+  }
+
   try {
-    const parsed = JSON.parse(rawJson) as Partial<ServiceAccountCredentials>;
+    const parsed = JSON.parse(text) as Partial<ServiceAccountCredentials>;
     if (
       typeof parsed.client_email === "string" &&
       typeof parsed.private_key === "string"
     ) {
       return {
-        client_email: parsed.client_email,
-        private_key: parsed.private_key.replace(/\\n/g, "\n"),
+        client_email: parsed.client_email.trim(),
+        private_key: parsed.private_key.replace(/\\n/g, "\n").trim(),
       };
     }
-  } catch {
+  } catch (err) {
+    console.error("Failed to parse GOOGLE_SERVICE_ACCOUNT_JSON:", err);
     return null;
   }
   return null;
@@ -138,7 +161,11 @@ export async function handleBookingRequest(
   const waTarget = env.PUBLIC_DEMO_WA_NUMBER ?? "6281234567890";
   const waLink = buildWhatsappLink(waTarget, validation.data, bookingId);
   const spreadsheetId = env.DEMO_SPREADSHEET_ID ?? "";
-  const sa = parseServiceAccount(env.GOOGLE_SERVICE_ACCOUNT_JSON);
+  const sa = parseServiceAccount(
+    env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
+  );
 
   if (!spreadsheetId || !sa) {
     console.error("Sheets configuration missing", {
@@ -201,6 +228,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
     GOOGLE_SERVICE_ACCOUNT_JSON:
       runtimeEnv.GOOGLE_SERVICE_ACCOUNT_JSON ??
       import.meta.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    GOOGLE_SERVICE_ACCOUNT_EMAIL:
+      runtimeEnv.GOOGLE_SERVICE_ACCOUNT_EMAIL ??
+      import.meta.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY:
+      runtimeEnv.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY ??
+      import.meta.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
     PUBLIC_DEMO_WA_NUMBER:
       runtimeEnv.PUBLIC_DEMO_WA_NUMBER ?? import.meta.env.PUBLIC_DEMO_WA_NUMBER,
     RATE_LIMIT_KV: runtimeEnv.RATE_LIMIT_KV,
