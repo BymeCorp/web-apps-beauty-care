@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `4` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-005`
+- **Total Task:** `8` · **Done:** `5` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-006`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -90,8 +90,8 @@
 
 ---
 
-#### `[ ] TASK-005` — Adapter AI CS Grounded (`ai.ts`) & Endpoint `POST /api/chat` (`FR-03`)
-- **Status:** `PENDING` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-external-integration.md`
+#### `[x] TASK-005` — Adapter AI CS Grounded (`ai.ts`) & Endpoint `POST /api/chat` (`FR-03`)
+- **Status:** `DONE` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-external-integration.md`
 - **Traceability:** `PRD §5 FR-03` · `TSD §5, §6.1` · **Dependencies:** `TASK-003`
 - **Change Boundary:**
   - Primary: `src/lib/ai.ts`, `src/pages/api/chat.ts`, `tests/unit/ai.test.ts`, `tests/integration/chat.test.ts`
@@ -101,9 +101,9 @@
   - `AC-02`: Pertanyaan medis/resep/diagnosis (`steroid`, `obat`, `resep`, `diagnosis`, `dosis`, dll.) ditolak sopan (non-medis) dan diarahkan ke dokter + booking.
   - `AC-03`: Rate-limit `15/jam/IP` (`429`), timeout/error LLM -> `504` / fallback deterministik berisi jam buka, kisaran harga `Rp 350.000–Rp 1.850.000`, serta `wa_link`; mendukung kill-switch `DISABLE_AI=true`.
 - **TDD & Langkah:**
-  1. [ ] **RED:** Unit + integration test untuk grounding prompt, guardrail medis, max 6 riwayat, `422`, `429`, `504` fallback, `DISABLE_AI=true`.
-  2. [ ] **GREEN:** Implementasi `src/lib/ai.ts` & `src/pages/api/chat.ts`.
-  3. [ ] **REFACTOR:** Cek zero leak `AI_API_KEY` dan zero reference ke IP/port privat.
+  1. [x] **RED:** Unit + integration test untuk grounding prompt, guardrail medis, max 6 riwayat, `422`, `429`, `504` fallback, `DISABLE_AI=true`.
+  2. [x] **GREEN:** Implementasi `src/lib/ai.ts` & `src/pages/api/chat.ts`.
+  3. [x] **REFACTOR:** Cek zero leak `AI_API_KEY` dan zero reference ke IP/port privat. Exit `0` (Vitest 30/30 pass).
 - **Verification Gate:** `pnpm test && pnpm lint && pnpm typecheck` -> Exit `0`.
 
 ---
