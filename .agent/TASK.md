@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `1` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-002`
+- **Total Task:** `8` · **Done:** `2` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-003`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -35,8 +35,8 @@
 
 ---
 
-#### `[ ] TASK-002` — Katalog Treatment Statis (`catalog.json`), Validasi Deterministik & Sanitizer (`validate.ts`)
-- **Status:** `PENDING` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-backend-api-endpoint.md`
+#### `[x] TASK-002` — Katalog Treatment Statis (`catalog.json`), Validasi Deterministik & Sanitizer (`validate.ts`)
+- **Status:** `DONE` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-backend-api-endpoint.md`
 - **Traceability:** `PRD §5 FR-01, FR-02` · `TSD §4.2, §5, §6.2` · `KNOWLEDGE §2–§3` · **Dependencies:** `TASK-001`
 - **Change Boundary:**
   - Primary: `src/lib/catalog.json`, `src/lib/validate.ts`, `tests/unit/validate.test.ts`
@@ -46,10 +46,10 @@
   - `AC-02`: `validateBooking()` menolak input salah dengan daftar detail `{ field, message }`, menormalkan WA (`08...`/`+628...` -> `628...`, `9–15` digit), mengecek tanggal `today..+30d` zona **Asia/Jakarta**, dan slot `09:00..19:00`.
   - `AC-03`: `sanitizeSheetCell()` mengawali `'` pada string berawalan `=`, `+`, `-`, `@`, `\t`, `\r`.
 - **TDD & Langkah:**
-  1. [ ] **RED:** Unit test edge cases WA, tanggal WIB lewat/+31 hari, slot invalid, `treatment_id` liar, dan formula injection (`=CMD(...)`, `+1+1`).
-  2. [ ] **GREEN:** Implementasi `catalog.json` dan `validate.ts`.
-  3. [ ] **REFACTOR:** Pastikan nol library validasi eksternal (Zod-lite manual sesuai `TSD §6.1`).
-- **Verification Gate:** `pnpm test -- tests/unit/validate.test.ts && pnpm lint && pnpm typecheck` -> Exit `0`.
+  1. [x] **RED:** Unit test edge cases WA, tanggal WIB lewat/+31 hari, slot invalid, `treatment_id` liar, dan formula injection (`=CMD(...)`, `+1+1`).
+  2. [x] **GREEN:** Implementasi `catalog.json` dan `validate.ts`.
+  3. [x] **REFACTOR:** Pastikan nol library validasi eksternal (Zod-lite manual sesuai `TSD §6.1`).
+- **Verification Gate:** `pnpm test -- tests/unit/validate.test.ts && pnpm lint && pnpm typecheck` -> Exit `0` (Biome 15 files 0 err, tsc 0 err, Vitest 9/9 pass, Astro build OK).
 
 ---
 
