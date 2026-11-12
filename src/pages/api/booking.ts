@@ -195,7 +195,7 @@ export async function handleBookingRequest(
     return errorResponse(
       502,
       "SHEET_WRITE_FAILED",
-      "Koneksi ke pencatat demo gagal. Data Anda tetap aman — coba lagi atau lanjut via WhatsApp.",
+      `Koneksi Google Sheets gagal (${appendResult.status}: ${appendResult.message}). Coba lagi atau lanjut WhatsApp.`,
       { wa_link: buildWhatsappLink(waTarget, validation.data) },
     );
   }

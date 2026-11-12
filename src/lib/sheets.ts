@@ -228,11 +228,12 @@ export async function appendBookingToSheets(
 
     return { ok: true, partial: false };
   } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
     console.error("Sheets append exception", {
       bookingId,
       wa: maskWhatsapp(booking.whatsapp),
-      err: err instanceof Error ? err.message : String(err),
+      err: msg,
     });
-    return { ok: false, status: 502, message: "Sheets request error" };
+    return { ok: false, status: 502, message: msg };
   }
 }
