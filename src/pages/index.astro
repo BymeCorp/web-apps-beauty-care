@@ -1,4 +1,6 @@
 ---
+import AiChatDrawer from "../components/AiChatDrawer";
+import BookingForm from "../components/BookingForm";
 import CatalogFilter from "../components/CatalogFilter";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { CATALOG } from "../lib/validate";
@@ -217,15 +219,25 @@ const sampleSheetRows = [
       </div>
     </section>
 
-    <section id="booking" class="border-t border-border bg-surface/60 py-10 md:py-12">
+        <section id="booking" class="border-t border-border bg-surface/60 py-10 md:py-12">
       <div class="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
-        <h2 class="font-display text-2xl font-bold text-ink">Booking Slot (Demo) — 3 Kolom Saja</h2>
-        <p class="mt-1 text-xs text-muted">
-          Formulir interaktif booking & konfirmasi Google Sheet Sandbox akan diaktifkan pada TASK-007.
-        </p>
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 class="font-display text-2xl font-bold text-ink">Booking Slot (Demo) — 3 Kolom Saja</h2>
+            <p class="mt-1 text-xs text-muted">
+              Pilih tanggal, slot jam WIB, nama &amp; nomor WhatsApp untuk simulasi langsung ke Google Sheet Sandbox.
+            </p>
+          </div>
+          <span class="text-xs font-medium text-muted tabular-nums">Validasi server &bull; tanpa hapus input saat error</span>
+        </div>
+        <div class="mt-6">
+          <BookingForm client:load items={[...CATALOG]} sheetUrl={sheetUrl} waNumber={waRaw} />
+        </div>
       </div>
     </section>
   </main>
+
+  <AiChatDrawer client:load waNumber={waRaw} />
 
   <footer id="kontak" class="bg-ink text-canvas">
     <div class="mx-auto max-w-6xl px-4 py-10 md:px-6 lg:px-8">

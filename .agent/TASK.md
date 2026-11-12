@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `6` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-007`
+- **Total Task:** `8` · **Done:** `7` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-008`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -124,8 +124,8 @@
 
 ---
 
-#### `[ ] TASK-007` — Preact Islands `BookingForm.tsx` (`SCR-02`) & `AiChatDrawer.tsx` (`SCR-03`) dengan State Lengkap
-- **Status:** `PENDING` · **Owner:** `Kay & Zero` · **Workflow:** `.agent/WORKFLOWS/p4-api-integration-frontend.md`
+#### `[x] TASK-007` — Preact Islands `BookingForm.tsx` (`SCR-02`) & `AiChatDrawer.tsx` (`SCR-03`) dengan State Lengkap
+- **Status:** `DONE` · **Owner:** `Kay & Zero` · **Workflow:** `.agent/WORKFLOWS/p4-api-integration-frontend.md`
 - **Traceability:** `PRD §5 FR-02, FR-03` · `DESIGN_TASK §5, §6.2, §6.3` · `Final_Design P1..P4` · **Dependencies:** `TASK-004, TASK-005, TASK-006`
 - **Change Boundary:**
   - Primary: `src/components/BookingForm.tsx`, `src/components/AiChatDrawer.tsx`
@@ -133,7 +133,7 @@
 - **Acceptance Criteria:**
   - `AC-01`: `BookingForm` mendukung pre-fill dari `CatalogFilter`/`AiChatDrawer`, slot jam 3-kolom (mobile) / 4-kolom (tablet/desktop) dengan slot hari ini yang lewat otomatis `disabled`, honeypot tersembunyi `company_website`, `X-Idempotency-Key`, state `loading` anti-double-submit, error `422`/`502`/`429` **tanpa hapus input** + `aria-live="polite"`, dan Kartu Konfirmasi `BK-XXXX` (`201`) + link Sheet & `wa.me`.
   - `AC-02`: `AiChatDrawer` tampil sebagai FAB sticky di thumb-zone (`pb-20` aman), membuka bottom-sheet `82dvh` di mobile (`<768px`) / panel `380px` di desktop, punya disclaimer non-medis, 3 quick chips, counter `0/400`, `typing-skeleton` 3-bar, tombol pintas *"Isi Form Booking"*, dan fallback `504`/`429`.
-- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm build` + cek ukuran gzip bundle `dist/_astro/*.js < 45 KB` -> Exit `0`.
+- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm build` + cek ukuran gzip bundle `dist/_astro/*.js < 45 KB` -> Exit `0` (Vitest 35/35 pass, total JS client gzip 18.56 KB).
 
 ---
 
