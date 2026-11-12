@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `5` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-006`
+- **Total Task:** `8` · **Done:** `6` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-007`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -110,8 +110,8 @@
 
 ### Fase C — Antarmuka UI Hi-Fi (`SCR-01..04`, State-Complete, Anti-Slop)
 
-#### `[ ] TASK-006` — Halaman Utama `index.astro` (`SCR-01` Hero/Alur/Sheet Proof, `SCR-04` Footer) & `CatalogFilter.tsx`
-- **Status:** `PENDING` · **Owner:** `Kay & Zero` · **Workflow:** `.agent/WORKFLOWS/p4-slicing-ui-frontend.md`
+#### `[x] TASK-006` — Halaman Utama `index.astro` (`SCR-01` Hero/Alur/Sheet Proof, `SCR-04` Footer) & `CatalogFilter.tsx`
+- **Status:** `DONE` · **Owner:** `Kay & Zero` · **Workflow:** `.agent/WORKFLOWS/p4-slicing-ui-frontend.md`
 - **Traceability:** `PRD §5 FR-01, §7` · `DESIGN_TASK §6.1, §6.4` · `Final_Design P1..P4` · **Dependencies:** `TASK-002`
 - **Change Boundary:**
   - Primary: `src/pages/index.astro`, `src/layouts/BaseLayout.astro`, `src/components/CatalogFilter.tsx`, `tests/unit/catalog.test.ts`
@@ -120,7 +120,7 @@
   - `AC-01`: Tampilan 1:1 mengikuti `Final_Design` & `.agent/DESIGN.md` (Strip `LIVE DEMO BYME CORPORATE`, Nav sticky `[DEMO]`, Hero asimetris + chip `dr. Nadya Aurelia, Sp.KK [DEMO]` + Kartu Preview Live Sheet, Alur 3 Langkah, Banner Sage Sheet, Footer `Jl. Senopati No. 48, Jakarta Selatan [DEMO]`).
   - `AC-02`: `CatalogFilter.tsx` menyaring 8 treatment (`Semua (8)`, `Facial (3)`, `Laser (3)`, `Skin Booster (2)`), punya **empty state** + tombol *"Reset ke Semua (8)"*, dan tombol *"Pilih & Booking"* memicu event prefill + scroll ke `#booking`.
   - `AC-03`: 0 emoji, semua harga `tabular-nums`, semua tombol/chip `>= 44x44px`, JS bundle `< 45 KB` gzip.
-- **Verification Gate:** `pnpm test && pnpm lint && pnpm typecheck && pnpm build` -> Exit `0`.
+- **Verification Gate:** `pnpm test && pnpm lint && pnpm typecheck && pnpm build` -> Exit `0` (Vitest 32/32 pass, client bundle gzip ~11 KB).
 
 ---
 
