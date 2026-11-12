@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `3` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-004`
+- **Total Task:** `8` · **Done:** `4` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-005`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -73,8 +73,8 @@
 
 ---
 
-#### `[ ] TASK-004` — Endpoint `POST /api/booking` (`FR-02`) + Integration Tests
-- **Status:** `PENDING` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-backend-api-endpoint.md`
+#### `[x] TASK-004` — Endpoint `POST /api/booking` (`FR-02`) + Integration Tests
+- **Status:** `DONE` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-backend-api-endpoint.md`
 - **Traceability:** `PRD §5 FR-02` · `TSD §5` · **Dependencies:** `TASK-003`
 - **Change Boundary:**
   - Primary: `src/pages/api/booking.ts`, `tests/integration/booking.test.ts`
@@ -83,9 +83,9 @@
   - `AC-01`: Happy path mengembalikan HTTP `201` + `booking_id` (`BK-XXXXXX`) + `wa_link` terisi nama, treatment, tanggal, slot.
   - `AC-02`: Honeypot `company_website` non-kosong mengembalikan `400 HONEYPOT_TRIGGERED`; payload invalid -> `422`; limit -> `429` dengan `retry_after_seconds`; idempotency hit -> `201` tanpa double-append; gagal Sheets -> `502 SHEET_WRITE_FAILED` lengkap dengan `wa_link` fallback.
 - **TDD & Langkah:**
-  1. [ ] **RED:** Integration test seluruh jalur (`201`, `400`, `422`, `429`, idempotent `201`, `502`).
-  2. [ ] **GREEN:** Implementasi `src/pages/api/booking.ts` tipis memanggil `validate.ts`, `rate-limit.ts`, `sheets.ts`.
-  3. [ ] **REFACTOR:** Cek tidak ada raw error/stack-trace/secret di body response.
+  1. [x] **RED:** Integration test seluruh jalur (`201`, `400`, `422`, `429`, idempotent `201`, `502`).
+  2. [x] **GREEN:** Implementasi `src/pages/api/booking.ts` tipis memanggil `validate.ts`, `rate-limit.ts`, `sheets.ts`.
+  3. [x] **REFACTOR:** Cek tidak ada raw error/stack-trace/secret di body response. Exit `0` (Vitest 21/21 pass).
 - **Verification Gate:** `pnpm test -- tests/integration/booking.test.ts && pnpm lint && pnpm typecheck` -> Exit `0`.
 
 ---
