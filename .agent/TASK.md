@@ -7,8 +7,8 @@
 ---
 
 ## 1. Ringkasan Progres
-- **Total Task:** `8` · **Done:** `0` · **Blocked:** `0`
-- **Task Aktif Sekarang:** `TASK-001` *(siap dimulai di Phase 4 setelah Gate 3 / persetujuan mulai Phase 4 dari Pak Yasfiq)*
+- **Total Task:** `8` · **Done:** `1` · **Blocked:** `0`
+- **Task Aktif Sekarang:** `TASK-002`
 - **Aturan Ukuran Slice:** Maksimal `~5–6` file disentuh per task (kecuali scaffolding awal).
 
 ---
@@ -17,8 +17,8 @@
 
 ### Fase A — Setup & Pondasi (`Scaffolding, Katalog & Validasi`)
 
-#### `[ ] TASK-001` — Scaffolding Astro 5 + Preact + Tailwind CSS v4 + Biome + Vitest + `/api/health`
-- **Status:** `PENDING` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-project-scaffolding.md`
+#### `[x] TASK-001` — Scaffolding Astro 5 + Preact + Tailwind CSS v4 + Biome + Vitest + `/api/health`
+- **Status:** `DONE` · **Owner:** `Zero` · **Workflow:** `.agent/WORKFLOWS/p4-project-scaffolding.md`
 - **Traceability:** `TSD §2, §5, §8` · **Dependencies:** `None`
 - **Change Boundary:**
   - Primary: `package.json`, `pnpm-lock.yaml`, `astro.config.mjs`, `tsconfig.json`, `biome.json`, `vitest.config.ts`, `src/styles/global.css`, `src/pages/api/health.ts`, `src/lib/errors.ts`, `src/middleware.ts`, `tests/unit/health.test.ts`
@@ -28,10 +28,10 @@
   - `AC-02`: `GET /api/health` mengembalikan `200 { ok: true, version, ts }` + security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`).
   - `AC-03`: `@theme` di `src/styles/global.css` memuat 100% token warna/font dari `.agent/DESIGN.md`.
 - **TDD & Langkah:**
-  1. [ ] **RED:** Tulis `tests/unit/health.test.ts` (assert status `200`, payload JSON, security headers).
-  2. [ ] **GREEN:** Inisialisasi proyek Astro 5 + Preact + `@astrojs/cloudflare` + Tailwind v4 + Biome + `/api/health`.
-  3. [ ] **REFACTOR:** Pastikan `.gitignore` mengecualikan `.env`, `.dev.vars`, `node_modules`, `dist`, `.wrangler`.
-- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build` -> Exit `0`.
+  1. [x] **RED:** Tulis `tests/unit/health.test.ts` (assert status `200`, payload JSON, security headers).
+  2. [x] **GREEN:** Inisialisasi proyek Astro 5 + Preact + `@astrojs/cloudflare` + Tailwind v4 + Biome + `/api/health`.
+  3. [x] **REFACTOR:** Pastikan `.gitignore` mengecualikan `.env`, `.dev.vars`, `node_modules`, `dist`, `.wrangler`.
+- **Verification Gate:** `pnpm lint && pnpm typecheck && pnpm test && pnpm build` -> Exit `0` (Biome 11 files 0 err, tsc 0 err, Vitest 1/1 pass, Astro build OK).
 
 ---
 
