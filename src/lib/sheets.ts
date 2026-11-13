@@ -54,10 +54,14 @@ function pemToDer(pem: string): ArrayBuffer {
   if (text.startsWith('"') && text.endsWith('"')) {
     text = text.slice(1, -1);
   }
-  text = text.replace(/\\r/g, "").replace(/\\n/g, "\n");
-  const cleanBody = text
-    .replace(/-----BEGIN [^-]+-----/g, "")
-    .replace(/-----END [^-]+-----/g, "")
+  // Strip headers whether they have spaces or not
+  let cleanBody = text
+    .replace(/-----BEGIN[^-]+-----/gi, "")
+    .replace(/-----END[^-]+-----/gi, "")
+    .replace(/\\r/g, "")
+    .replace(/\\n/g, "")
+    .replace(/\r/g, "")
+    .replace(/\n/g, "")
     .replace(/\s+/g, "");
 
   let u8: Uint8Array;
