@@ -50,23 +50,27 @@ function toBase64Url(input: Uint8Array | string): string {
 }
 
 function pemToDer(pem: string): ArrayBuffer {
-  let unescaped = pem.replace(/\\n/g, "\n");
-  const cleanBody = unescaped
+  let text = pem.trim();
+  if (text.startsWith('"') && text.endsWith('"')) {
+    text = text.slice(1, -1);
+  }
+  text = text.replace(/\\r/g, "").replace(/\\n/g, "\n");
+  const cleanBody = text
     .replace(/-----BEGIN [^-]+-----/g, "")
     .replace(/-----END [^-]+-----/g, "")
     .replace(/\s+/g, "");
 
+  let u8: Uint8Array;
   if (typeof Buffer !== "undefined") {
     const buf = Buffer.from(cleanBody, "base64");
-    return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    u8 = new Uint8Array(buf.length);
+    for (let i = 0; i < buf.length; i++) u8[i] = buf[i];
+  } else {
+    const bin = atob(cleanBody);
+    u8 = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
   }
-
-  const bin = atob(cleanBody);
-  const bytes = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) {
-    bytes[i] = bin.charCodeAt(i);
-  }
-  return bytes.buffer;
+  return u8.buffer;
 }
 
 async function createSignedJwt(sa: ServiceAccountCredentials): Promise<string> {
