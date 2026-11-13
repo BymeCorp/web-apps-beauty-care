@@ -50,11 +50,10 @@ function toBase64Url(input: Uint8Array | string): string {
 }
 
 function pemToDer(pem: string): ArrayBuffer {
-  const cleanBody = pem
+  let unescaped = pem.replace(/\\n/g, "\n");
+  const cleanBody = unescaped
     .replace(/-----BEGIN [^-]+-----/g, "")
     .replace(/-----END [^-]+-----/g, "")
-    .replace(/\\r/g, "")
-    .replace(/\\n/g, "")
     .replace(/\s+/g, "");
 
   if (typeof Buffer !== "undefined") {
