@@ -86,13 +86,29 @@ async function createSignedJwt(sa: ServiceAccountCredentials): Promise<string> {
     }),
   );
   const signingInput = `${header}.${claim}`;
-  const key = await crypto.subtle.importKey(
-    "pkcs8",
-    pemToDer(sa.private_key),
-    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-    false,
-    ["sign"],
-  );
+  let der: ArrayBuffer;
+  try {
+    der = pemToDer(sa.private_key);
+  } catch (err) {
+    throw new Error(`PEM_PARSE_ERROR: ${err instanceof Error ? err.message : String(err)}`);
+  }
+
+  let key: CryptoKey;
+  try {
+    key = await crypto.subtle.importKey(
+      "pkcs8",
+      der,
+      { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+      false,
+      ["sign"],
+    );
+  } catch (err) {
+    const rawLen = sa.private_key ? sa.private_key.length : 0;
+    const derLen = der ? der.byteLength : 0;
+    const head = sa.private_key ? sa.private_key.slice(0, 30) : "";
+    const tail = sa.private_key ? sa.private_key.slice(-30) : "";
+    throw new Error(`IMPORT_KEY_FAILED (rawLen:${rawLen}, derLen:${derLen}, head:${JSON.stringify(head)}, tail:${JSON.stringify(tail)}): ${err instanceof Error ? err.message : String(err)}`);
+  }
   const sig = await crypto.subtle.sign(
     "RSASSA-PKCS1-v1_5",
     key,
