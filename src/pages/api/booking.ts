@@ -58,13 +58,13 @@ function parseServiceAccount(
   fallbackEmail?: string,
   fallbackKey?: string,
 ): ServiceAccountCredentials | null {
-  if (fallbackEmail && fallbackKey) {
+  const effectiveEmail = (fallbackEmail && fallbackEmail.trim()) || 'beauty-demo-sheets@byme-beauty-demo.iam.gserviceaccount.com';
+  if (fallbackKey && fallbackKey.trim()) {
     return {
-      client_email: fallbackEmail.trim(),
+      client_email: effectiveEmail,
       private_key: fallbackKey.replace(/\\n/g, "\n").trim(),
     };
   }
-
   if (!rawJson) return null;
   let text = rawJson.trim();
 
