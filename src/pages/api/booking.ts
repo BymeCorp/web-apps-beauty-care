@@ -239,18 +239,23 @@ export const POST: APIRoute = async (context) => {
 
   const env: BookingEnv = {
     DEMO_SPREADSHEET_ID:
-      runtimeEnv.DEMO_SPREADSHEET_ID ?? import.meta.env.DEMO_SPREADSHEET_ID,
+      runtimeEnv.DEMO_SPREADSHEET_ID ??
+      import.meta.env.DEMO_SPREADSHEET_ID ??
+      "1ycZIBkITlLuKzy3ujMWcnqkmDyL-UsDY0jBxrJZEUPo",
     GOOGLE_SERVICE_ACCOUNT_JSON:
       runtimeEnv.GOOGLE_SERVICE_ACCOUNT_JSON ??
       import.meta.env.GOOGLE_SERVICE_ACCOUNT_JSON,
     GOOGLE_SERVICE_ACCOUNT_EMAIL:
       runtimeEnv.GOOGLE_SERVICE_ACCOUNT_EMAIL ??
-      import.meta.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      import.meta.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ??
+      "beauty-demo-sheets@byme-beauty-demo.iam.gserviceaccount.com",
     GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY:
       runtimeEnv.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY ??
       import.meta.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
     PUBLIC_DEMO_WA_NUMBER:
-      runtimeEnv.PUBLIC_DEMO_WA_NUMBER ?? import.meta.env.PUBLIC_DEMO_WA_NUMBER,
+      runtimeEnv.PUBLIC_DEMO_WA_NUMBER ??
+      import.meta.env.PUBLIC_DEMO_WA_NUMBER ??
+      "6285891185933",
     RATE_LIMIT_KV:
       runtimeEnv.RATE_LIMIT_KV ?? anyLocals.runtime?.env?.RATE_LIMIT_KV,
   };
