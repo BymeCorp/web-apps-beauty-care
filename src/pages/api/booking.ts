@@ -222,9 +222,21 @@ export async function handleBookingRequest(
   return jsonResponse(201, { success: true, data: payload });
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async (context) => {
+  const { request, locals } = context;
+  const anyLocals = locals as any;
+  const anyContext = context as any;
+  const processEnv = typeof process !== "undefined" ? process.env : {};
+
   const runtimeEnv =
-    (locals as { runtime?: { env?: BookingEnv } }).runtime?.env ?? {};
+    anyLocals.runtime?.env ??
+    anyContext.runtime?.env ??
+    anyLocals.cloudflare?.env ??
+    anyContext.cloudflare?.env ??
+    anyLocals.env ??
+    processEnv ??
+    {};
+
   const env: BookingEnv = {
     DEMO_SPREADSHEET_ID:
       runtimeEnv.DEMO_SPREADSHEET_ID ?? import.meta.env.DEMO_SPREADSHEET_ID,
@@ -239,7 +251,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
       import.meta.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
     PUBLIC_DEMO_WA_NUMBER:
       runtimeEnv.PUBLIC_DEMO_WA_NUMBER ?? import.meta.env.PUBLIC_DEMO_WA_NUMBER,
-    RATE_LIMIT_KV: runtimeEnv.RATE_LIMIT_KV,
+    RATE_LIMIT_KV:
+      runtimeEnv.RATE_LIMIT_KV ?? anyLocals.runtime?.env?.RATE_LIMIT_KV,
   };
   return handleBookingRequest(request, env);
 };
